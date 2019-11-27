@@ -29,18 +29,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var btnSposto: UIButton!
     
     var arrMobile : [Int] = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0]
-    let arrFisso = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0]
     let arrRandom : [Int] = [1,-1,4,-4]
     
     override func viewDidLoad() {
         
-        
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.gioco1()
+        self.gioco()
     }
-    
-    
     
     func lock()
     {
@@ -82,16 +78,9 @@ class ViewController: UIViewController {
 
     }
     
-    func gioco1()
+    func gioco()
     {
-        let tent = 5 //varia in base all'utente quanti tentativi vuole
-        //var a = arrMobile.index(of: 0)
-        //let a = Int.random(in: 0..<3)
-        //se è 1 va indietro == esce 0
-        //se è -1 va avanti == esce 1
-        //se è 4 scende == esce 2
-        //se è -4 va sopra == esce 3
-            
+        let tent = 5//varia in base all'utente quanti tentativi vuole
         for _ in 1 ... tent
         {
             var b = arrRandom.randomElement()
