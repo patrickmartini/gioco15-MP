@@ -30,12 +30,13 @@ class ViewController: UIViewController {
     
     var arrMobile : [Int] = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0]
     let arrRandom : [Int] = [1,-1,4,-4]
+    var spost = 0
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.gioco()
+        self.mischia()
     }
     
     func lock()
@@ -78,7 +79,7 @@ class ViewController: UIViewController {
 
     }
     
-    func gioco()
+    func mischia()
     {
         let tent = 5//varia in base all'utente quanti tentativi vuole
         for _ in 1 ... tent
@@ -97,5 +98,47 @@ class ViewController: UIViewController {
         }
         print(arrMobile)
     }
+    
+    func grafica(){
+        btn1.setTitle(String(arrMobile[0]),for: .normal)
+        btn2.setTitle(String(arrMobile[1]),for: .normal)
+        btn3.setTitle(String(arrMobile[2]),for: .normal)
+        btn4.setTitle(String(arrMobile[3]),for: .normal)
+        btn5.setTitle(String(arrMobile[4]),for: .normal)
+        btn6.setTitle(String(arrMobile[5]),for: .normal)
+        btn7.setTitle(String(arrMobile[6]),for: .normal)
+        btn8.setTitle(String(arrMobile[7]),for: .normal)
+        btn9.setTitle(String(arrMobile[8]),for: .normal)
+        btn10.setTitle(String(arrMobile[9]),for: .normal)
+        btn11.setTitle(String(arrMobile[10]),for: .normal)
+        btn12.setTitle(String(arrMobile[11]),for: .normal)
+        btn13.setTitle(String(arrMobile[12]),for: .normal)
+        btn14.setTitle(String(arrMobile[13]),for: .normal)
+        btn15.setTitle(String(arrMobile[14]),for: .normal)
+        btnSposto.setTitle(String(arrMobile[15]),for: .normal)
+    }
+    
+    @IBAction func btnSx(_ sender: Any) {
+        spost = arrRandom[1]
+    }
+    
+    @IBAction func btnDx(_ sender: Any) {
+        spost = arrRandom[0]
+    }
+    
+    @IBAction func btnUp(_ sender: Any) {
+        spost = arrRandom[3]
+    }
+    
+    @IBAction func btnDown(_ sender: Any) {
+        spost = arrRandom[2]
+    }
+    
+    func scambia()
+    {
+        let x = arrMobile.firstIndex(of: 0)
+        arrMobile.swapAt(x!, x! + spost)
+    }
+    
 }
 
