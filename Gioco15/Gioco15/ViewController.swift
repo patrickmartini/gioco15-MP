@@ -27,6 +27,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var btn14: UIButton!
     @IBOutlet weak var btn15: UIButton!
     @IBOutlet weak var btnSposto: UIButton!
+    @IBOutlet weak var btnMischia: UIButton!
     
     var arrMobile : [Int] = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0]
     let arrRandom : [Int] = [1,-1,4,-4]
@@ -36,7 +37,6 @@ class ViewController: UIViewController {
         
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.mischia()
     }
     
     func lock()
@@ -81,14 +81,14 @@ class ViewController: UIViewController {
     
     func mischia()
     {
-        let tent = 5//varia in base all'utente quanti tentativi vuole
-        for _ in 1 ... tent
+        let tent = Int(txtMos.text!)//varia in base all'utente quanti tentativi vuole
+        for _ in 1 ... tent!
         {
             var b = arrRandom.randomElement()
             var x = arrMobile.firstIndex(of: 0)
             var y = x! + b!
 
-            while(y < 0 && y > 15)
+            while(y < 0 || y > 15)
             {
                 b = arrRandom.randomElement()
                 x = arrMobile.firstIndex(of: 0)
@@ -118,27 +118,43 @@ class ViewController: UIViewController {
         btnSposto.setTitle(String(arrMobile[15]),for: .normal)
     }
     
+    @IBAction func mescola(_ sender: UIButton) {
+        mischia()
+        grafica()
+    }
+    
     @IBAction func btnSx(_ sender: Any) {
         spost = arrRandom[1]
+        scambia()
+        grafica()
     }
     
     @IBAction func btnDx(_ sender: Any) {
         spost = arrRandom[0]
+        scambia()
+        grafica()
     }
     
     @IBAction func btnUp(_ sender: Any) {
         spost = arrRandom[3]
+        scambia()
+        grafica()
     }
     
     @IBAction func btnDown(_ sender: Any) {
         spost = arrRandom[2]
+        scambia()
+        grafica()
     }
     
     func scambia()
     {
         let x = arrMobile.firstIndex(of: 0)
-        arrMobile.swapAt(x!, x! + spost)
+        //if (x! + 1) % 4 == 0 {
+        let y = x! + spost
+        if !(y < 0 || y > 15){
+        arrMobile.swapAt(x!, y)
+        }
     }
-    
 }
 
