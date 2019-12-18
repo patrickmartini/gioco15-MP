@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  mp-GiocoDel15
 //
-//  Created by  PATRICK MARTINI on 23/10/2019.
+//  Created by PATRICK MARTINI on 23/10/2019.
 //  Copyright © 2019 PATRICK MARTINI. All rights reserved.
 //
 
@@ -28,8 +28,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var btn15: UIButton!
     @IBOutlet weak var btnSposto: UIButton!
     @IBOutlet weak var btnMischia: UIButton!
+    @IBOutlet weak var btnUp: UIButton!
+    @IBOutlet weak var btnDown: UIButton!
+    @IBOutlet weak var btnSx: UIButton!
+    @IBOutlet weak var btnDx: UIButton!
+    @IBOutlet weak var lblVictory: UILabel!
     
     var arrMobile : [Int] = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0]
+    let arrFisso :  [Int] = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0]
     let arrRandom : [Int] = [1,-1,4,-4]
     var spost = 0
     
@@ -79,8 +85,7 @@ class ViewController: UIViewController {
 
     }
     
-    func mischia()
-    {
+    func mischia(){
         let tent = Int(txtMos.text!)//varia in base all'utente quanti tentativi vuole
         for _ in 1 ... tent!
         {
@@ -118,43 +123,80 @@ class ViewController: UIViewController {
         btnSposto.setTitle(String(arrMobile[15]),for: .normal)
     }
     
+    func scambia(){
+        let x = arrMobile.firstIndex(of: 0)
+        print(x)
+        //if (x! + 1) % 4 == 0 {
+        let y = x! + spost
+        print(y)
+        if !(y < 0 || y > 15){
+        arrMobile.swapAt(x!, y)
+            print(arrMobile[y])
+            print(arrMobile[x!])
+        }
+    }
+    
+    func contrvittoria(){
+        if arrFisso == arrMobile{
+            lblVictory.text = "hai vinto!"
+        }
+    }
+    
+    func contr(){
+        var x = arrMobile.firstIndex(of: 0)
+        if (x!+1)%4 == 0{
+            btnDx.isUserInteractionEnabled = false
+        }
+        if x!%4 == 0{
+            btnSx.isUserInteractionEnabled = false
+        }
+    }
+    
+    func sbloccontr(){
+        btnSx.isUserInteractionEnabled = true
+        btnDx.isUserInteractionEnabled = true
+    }
+    
     @IBAction func mescola(_ sender: UIButton) {
         mischia()
         grafica()
     }
     
     @IBAction func btnSx(_ sender: Any) {
+        sbloccontr()
         spost = arrRandom[1]
+        contr()
         scambia()
         grafica()
+        contrvittoria()
     }
     
     @IBAction func btnDx(_ sender: Any) {
+        sbloccontr()
         spost = arrRandom[0]
+        contr()
         scambia()
         grafica()
+        contrvittoria()
     }
     
     @IBAction func btnUp(_ sender: Any) {
+        sbloccontr()
         spost = arrRandom[3]
+        contr()
         scambia()
         grafica()
+        contrvittoria()
     }
     
     @IBAction func btnDown(_ sender: Any) {
+        sbloccontr()
         spost = arrRandom[2]
+        contr()
         scambia()
         grafica()
-    }
-    
-    func scambia()
-    {
-        let x = arrMobile.firstIndex(of: 0)
-        //if (x! + 1) % 4 == 0 {
-        let y = x! + spost
-        if !(y < 0 || y > 15){
-        arrMobile.swapAt(x!, y)
-        }
+        contrvittoria()
     }
 }
+
 
